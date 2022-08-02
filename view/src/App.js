@@ -4,7 +4,7 @@ import './App.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
-import Books from './components/Books/Books';
+import BooksList from './components/BooksList';
 import Authors from './components/Authors/Authors';
 import Filter from './components/Filter';
 
@@ -24,7 +24,7 @@ function App() {
 
           <div className='content'>
             <Routes>
-              <Route path='/books' element={<Books />} />
+              <Route path='/books' element={<BooksList />} />
               <Route path='/authors' element={<Authors />} />
             </Routes>
           </div>        
