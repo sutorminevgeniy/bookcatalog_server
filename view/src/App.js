@@ -5,7 +5,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 
 import BooksList from './components/BooksList';
-import Authors from './components/Authors/Authors';
+import AuthorsList from './components/AuthorsList';
 import Filter from './components/Filter';
 
 
@@ -25,7 +25,7 @@ function App() {
           <div className='content'>
             <Routes>
               <Route path='/books' element={<BooksList />} />
-              <Route path='/authors' element={<Authors />} />
+              <Route path='/authors' element={<AuthorsList />} />
             </Routes>
           </div>        
         </main>

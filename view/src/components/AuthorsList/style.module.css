@@ -1,0 +1,22 @@
+.authorList {
+    margin-bottom: 5px;
+}
+.author {
+    margin: 15px 0;
+}
+.author>a {
+    display: block;
+    text-decoration: none;
+    color: black;
+}
+.image img {
+    height: 100px;
+}
+.name {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+.countBooks>a {
+    font-style: italic;
+    text-decoration: none;
+}
