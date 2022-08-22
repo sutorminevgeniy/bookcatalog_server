@@ -1,6 +1,8 @@
+import style from './style.module.css';
+
 const Footer = () => {
   return (
-    <div className="footer">
+    <div className={style.footer}>
       <a
         className="App-link"
         href="https://reactjs.org"

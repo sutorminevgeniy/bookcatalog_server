@@ -31,5 +31,6 @@ aside {
 
 footer{
   grid-area: footer;
-  background-color: #9afbb7;
+  background-color: #282c34c4;
+  color: white;
 }

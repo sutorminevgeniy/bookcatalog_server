@@ -2,7 +2,7 @@ import style from './style.module.css'
 
 import Item from './Item';
 
-import Reviews from '../Reviews/Reviews';
+import ReviewsList from '../ReviewsList';
 
 const BooksList = () => {
   return (
@@ -13,7 +13,7 @@ const BooksList = () => {
         <Item name="Книга 3" author="Автор 3"/>
       </div>
       <div>
-        <Reviews />
+        <ReviewsList />
       </div>
     </div>
   );
