@@ -5,7 +5,7 @@ import Item from './Item';
 import ReviewsList from '../ReviewsList';
 
 const BooksList = (props) => {
-  const booksElements = props.data.map( 
+  const booksElements = props.state.books.map( 
     row => <Item name={row.name} author={row.author} id={row.id} key={row.id} />
   );
 
@@ -15,7 +15,7 @@ const BooksList = (props) => {
         {booksElements}
       </div>
       <div>
-        <ReviewsList data={props.reviews} />
+        <ReviewsList state={props.state.reviews} />
       </div>
     </div>
   );

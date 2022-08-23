@@ -24,8 +24,10 @@ function App(props) {
 
           <div className='content'>
             <Routes>
-              <Route path='/books' element={<BooksList data={props.books} reviews={props.reviews} />} />
-              <Route path='/authors' element={<AuthorsList data={props.authors} />} />
+              <Route path='/books' element={<BooksList 
+                state={props.state.booksListPage} />} />
+              <Route path='/authors' element={<AuthorsList 
+                state={props.state.authorsListPage} />} />
             </Routes>
           </div>        
         </main>
