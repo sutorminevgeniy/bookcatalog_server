@@ -5,6 +5,9 @@ const state = {
             { name: "Книга 2", author: "Автор 2", id: "2" },
             { name: "Книга 3", author: "Автор 3", id: "3" },
         ],
+    },
+    bookPage: {
+        book: { name: "Книга 1", author: "Автор 1", id: "1" },
         reviews: [
             { user: "Пользователь 1", message: "Отзыв о книге 1", rate: "5", id: "1" },
             { user: "Пользователь 2", message: "Отзыв о книге 1", rate: "4", id: "2" },
