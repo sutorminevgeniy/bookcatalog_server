@@ -9,7 +9,7 @@ import AuthorsList from './components/AuthorsList';
 import Filter from './components/Filter';
 
 
-function App() {
+function App(props) {
   return (
     <BrowserRouter>
       <div className="wrapper">
@@ -24,8 +24,8 @@ function App() {
 
           <div className='content'>
             <Routes>
-              <Route path='/books' element={<BooksList />} />
-              <Route path='/authors' element={<AuthorsList />} />
+              <Route path='/books' element={<BooksList data={props.books} reviews={props.reviews} />} />
+              <Route path='/authors' element={<AuthorsList data={props.authors} />} />
             </Routes>
           </div>        
         </main>
