@@ -1,9 +1,11 @@
 
-import { useParams } from 'react-router-dom';
-
 import style from './style.module.css'
 
+import imgBookDefault from './book.svg';
+
 import ReviewsList from '../ReviewsList';
+
+import { useParams } from 'react-router-dom';
 
 const BooksList = (props) => {
   // Получение :id параметра из URL.
@@ -12,7 +14,8 @@ const BooksList = (props) => {
   return (
     <div className="books">
       <h1>Книга {id}</h1>
-      <div>Автор 1</div>
+      <div>Автор {id}</div>
+      <img src={imgBookDefault} alt=""/>
       <div className={style.bookList}>
         Описание книги {id}
       </div>
