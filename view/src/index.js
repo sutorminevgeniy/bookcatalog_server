@@ -7,11 +7,12 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import state from './redux/state'
+import {addReview} from './redux/state'
 
 const container = document.getElementById('root');
 const root = createRoot(container); // createRoot(container!) if you use TypeScript
 root.render(<React.StrictMode>
-              <App state={state} />
+              <App state={state} addReview={addReview} />
             </React.StrictMode>);
 
 // If you want to start measuring performance in your app, pass a function

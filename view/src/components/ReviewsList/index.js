@@ -14,7 +14,9 @@ const ReviewsList = (props) => {
     const addReview = () => {
         const message = messageElement.current.value;
         const rate = rateElement.current.value;
-        
+
+        props.addReview(message, rate);
+
         alert('Hi!!! ' + message + ' ' + rate);
     };
   

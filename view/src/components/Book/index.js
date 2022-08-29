@@ -20,7 +20,9 @@ const BooksList = (props) => {
         Описание книги {id}
       </div>
       <div>
-        <ReviewsList state={props.state.reviews} />
+        <ReviewsList
+          state={props.state.reviews}
+          addReview={props.addReview}  />
       </div>
     </div>
   );

@@ -26,7 +26,8 @@ function App(props) {
           <div className='content'>
             <Routes>
               <Route path='/book/:id' element={<Book 
-                state={props.state.bookPage} />} />                
+                state={props.state.bookPage}
+                addReview={props.addReview} />} />                
               <Route path='/books' element={<BooksList 
                 state={props.state.booksListPage} />} />
               <Route path='/authors' element={<AuthorsList 

@@ -23,4 +23,14 @@ const state = {
     },
 };
 
+export const addReview = (message, rate) => {
+    const newReview = { 
+        user: "Пользователь Admin",
+        message: message,
+        rate: rate,
+        id: state.bookPage.reviews.length + 1 };
+    
+        state.bookPage.reviews.push(newReview);
+};
+
 export default state;
