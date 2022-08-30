@@ -1,5 +1,8 @@
-import {renderEntireTree} from '../render'
+let renderEntireTree = () => {
+    console.log('State was changed!')
+};
 
+/// Состояние на основание которого строиться приложение
 const state = {
     booksListPage: {
         books: [
@@ -25,6 +28,8 @@ const state = {
     },
 };
 
+// Деиствия по измению состояния
+//  добавление отзыва в часности
 export const addReview = (message, rate) => {
     const newReview = { 
         user: "Пользователь Admin",
@@ -34,7 +39,11 @@ export const addReview = (message, rate) => {
     
     state.bookPage.reviews.push(newReview);
 
-    renderEntireTree(state, addReview);
+    renderEntireTree();
+};
+
+export const subscribe = (observer) => {
+    renderEntireTree = observer;
 };
 
 export default state;
