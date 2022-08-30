@@ -1,3 +1,5 @@
+import {renderEntireTree} from '../render'
+
 const state = {
     booksListPage: {
         books: [
@@ -30,7 +32,9 @@ export const addReview = (message, rate) => {
         rate: rate,
         id: state.bookPage.reviews.length + 1 };
     
-        state.bookPage.reviews.push(newReview);
+    state.bookPage.reviews.push(newReview);
+
+    renderEntireTree(state, addReview);
 };
 
 export default state;
