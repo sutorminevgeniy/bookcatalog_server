@@ -11,14 +11,14 @@ import state, {subscribe, addReview} from './redux/state'
 const container = document.getElementById('root');
 const root = createRoot(container); // createRoot(container!) if you use TypeScript
 
-const renderEntireTree = (state, addReview) => {
+const renderEntireTree = () => {
     root.render(<React.StrictMode>
         <App state={state} addReview={addReview} />
       </React.StrictMode>);
 
 };
 
-renderEntireTree(state, addReview);
+renderEntireTree();
 
 subscribe(renderEntireTree);
 
