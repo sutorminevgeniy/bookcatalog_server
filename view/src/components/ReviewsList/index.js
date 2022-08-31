@@ -15,7 +15,7 @@ const ReviewsList = (props) => {
         const message = messageElement.current.value;
         const rate = rateElement.current.value;
 
-        props.addReview(message, rate);
+        props.dispatch({type: 'ADD-REVIEW', message, rate});
 
         messageElement.current.value = '';
         rateElement.current.value = '';

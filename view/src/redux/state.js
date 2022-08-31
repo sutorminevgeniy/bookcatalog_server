@@ -38,18 +38,19 @@ const store = {
         this._callSubscriber = observer;
     },
 
-    // Деиствия по измению состояния
-    //  добавление отзыва в часности
-    addReview(message, rate) {
-        const newReview = { 
-            user: "Пользователь Admin",
-            message: message,
-            rate: rate,
-            id: this._state.bookPage.reviews.length + 1 };
-        
-        this._state.bookPage.reviews.push(newReview);
-
-        this._callSubscriber();
+    // Функция запускающая различные изменеия состояния приложения
+    dispatch(action) { // {type; 'ADD-REVIEW'}
+        if(action.type === 'ADD-REVIEW') { // добавление отзыва в часности
+            const newReview = { 
+                user: "Пользователь Admin",
+                message: action.message,
+                rate: action.rate,
+                id: this._state.bookPage.reviews.length + 1 };
+            
+            this._state.bookPage.reviews.push(newReview);
+    
+            this._callSubscriber();            
+        }
     },
 }
 

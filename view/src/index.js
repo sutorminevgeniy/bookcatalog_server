@@ -13,7 +13,7 @@ const root = createRoot(container); // createRoot(container!) if you use TypeScr
 
 const renderEntireTree = () => {
     root.render(<React.StrictMode>
-        <App state={store.getState()} addReview={store.addReview.bind(store)} />
+        <App state={store.getState()} dispatch={store.dispatch.bind(store)} />
       </React.StrictMode>);
 
 };
