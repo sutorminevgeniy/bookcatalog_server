@@ -1,7 +1,10 @@
+import React from 'react';
+
 import style from './style.module.css';
 
 import Item from './Item';
-import React from 'react';
+
+import {addReviewActionCreator} from '../../redux/state';
 
 const ReviewsList = (props) => {
     const reviewsElements = props.state.map( 
@@ -15,7 +18,9 @@ const ReviewsList = (props) => {
         const message = messageElement.current.value;
         const rate = rateElement.current.value;
 
-        props.dispatch({type: 'ADD-REVIEW', message, rate});
+        const action = addReviewActionCreator(message, rate);
+
+        props.dispatch(action);
 
         messageElement.current.value = '';
         rateElement.current.value = '';

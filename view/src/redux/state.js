@@ -1,3 +1,5 @@
+const ADD_REVIEW = 'ADD-REVIEW';
+
 // Хранилище - управляет состоянием
 const store = {
     // Состояние на основание которого строиться приложение
@@ -40,7 +42,7 @@ const store = {
 
     // Функция запускающая различные изменеия состояния приложения
     dispatch(action) { // {type; 'ADD-REVIEW'}
-        if(action.type === 'ADD-REVIEW') { // добавление отзыва в часности
+        if(action.type === ADD_REVIEW) { // добавление отзыва в часности
             const newReview = { 
                 user: "Пользователь Admin",
                 message: action.message,
@@ -54,6 +56,15 @@ const store = {
     },
 }
 
-window.store = store;
+// Функция создания action для dispatch
+export const addReviewActionCreator = (message, rate) => {
+    return {
+        type: ADD_REVIEW,
+        message,
+        rate,
+    }
+}
 
 export default store;
+
+window.store = store;
