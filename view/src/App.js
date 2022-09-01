@@ -30,10 +30,11 @@ function App(props) {
                 state={props.state.bookPage}
                 dispatch={props.dispatch} />} />                
               <Route path='/books' element={<BooksList 
-                state={props.state.booksListPage} />} />
+                state={props.state.booksListPage}
+                dispatch={props.dispatch} />} />
               <Route path='/authors' element={<AuthorsList 
                 state={props.state.authorsListPage} />} />
-              <Route path="*" element={<p>Такой страницы нет!</p>}
+              <Route path="*" element={<p>Такой страницы еще нет!</p>}
               />
             </Routes>
           </div>        

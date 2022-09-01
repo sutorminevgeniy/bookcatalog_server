@@ -1,4 +1,5 @@
 const ADD_REVIEW = 'ADD-REVIEW';
+const ADD_BOOK = 'ADD-BOOK';
 
 // Хранилище - управляет состоянием
 const store = {
@@ -12,7 +13,7 @@ const store = {
             ],
         },
         bookPage: {
-            book: { name: "Книга 1", author: "Автор 1", id: "1" },
+            book: { name: "Книга 1", author: "Автор 1", description: "", id: "1" },
             reviews: [
                 { user: "Пользователь 1", message: "Отзыв о книге 1", rate: "5", id: "1" },
                 { user: "Пользователь 2", message: "Отзыв о книге 1", rate: "4", id: "2" },
@@ -42,7 +43,7 @@ const store = {
 
     // Функция запускающая различные изменеия состояния приложения
     dispatch(action) { // {type; 'ADD-REVIEW'}
-        if(action.type === ADD_REVIEW) { // добавление отзыва в часности
+        if (action.type === ADD_REVIEW) { // добавление отзыва в часности
             const newReview = { 
                 user: "Пользователь Admin",
                 message: action.message,
@@ -53,15 +54,34 @@ const store = {
     
             this._callSubscriber();            
         }
+        else if (action.type === ADD_BOOK) {
+            const newBook = { 
+                name: action.name,
+                author: action.author,
+                description: action.description,
+                id: this._state.booksListPage.books.length + 1 };
+            
+            this._state.booksListPage.books.push(newBook);
+    
+            this._callSubscriber();         
+        }
     },
 }
 
-// Функция создания action для dispatch
-export const addReviewActionCreator = (message, rate) => {
+// Функции создания action для dispatch
+export const addReviewCreator = (message, rate) => {
     return {
         type: ADD_REVIEW,
         message,
         rate,
+    }
+}
+export const addBookCreator = (name, author, description) => {
+    return {
+        type: ADD_BOOK,
+        name,
+        author,
+        description,
     }
 }
 

@@ -23,8 +23,8 @@ const Header = () => {
         </li>
         <li className={style.navItem}>
           <NavLink
-            to="/news"
-            className={({ isActive }) => isActive ? style.active : undefined }>Новости</NavLink>
+            to="/users"
+            className={({ isActive }) => isActive ? style.active : undefined }>Пользователи</NavLink>
         </li>
         <li className={style.navItem}>
           <NavLink 

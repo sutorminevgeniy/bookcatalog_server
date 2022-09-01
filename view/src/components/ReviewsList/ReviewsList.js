@@ -4,7 +4,7 @@ import style from './ReviewsList.module.css';
 
 import ReviewsListItem from './ReviewsListItem';
 
-import {addReviewActionCreator} from '../../redux/state';
+import {addReviewCreator} from '../../redux/state';
 
 const ReviewsList = (props) => {
     const messageElement = React.createRef();
@@ -14,7 +14,7 @@ const ReviewsList = (props) => {
         const message = messageElement.current.value;
         const rate = rateElement.current.value;
 
-        const action = addReviewActionCreator(message, rate);
+        const action = addReviewCreator(message, rate);
 
         props.dispatch(action);
 
@@ -40,7 +40,7 @@ const ReviewsList = (props) => {
                     <input ref={rateElement} type="text"></input>
                 </div>
                 <div>
-                    <button onClick={ addReview }>Добавить отзыв</button>
+                    <button onClick={ addReview }>Оставить отзыв</button>
                 </div>
             </div>
         </div>
