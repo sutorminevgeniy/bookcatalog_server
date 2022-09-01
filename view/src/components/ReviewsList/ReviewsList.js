@@ -1,16 +1,12 @@
 import React from 'react';
 
-import style from './style.module.css';
+import style from './ReviewsList.module.css';
 
-import Item from './Item';
+import ReviewsListItem from './ReviewsListItem';
 
 import {addReviewActionCreator} from '../../redux/state';
 
 const ReviewsList = (props) => {
-    const reviewsElements = props.state.map( 
-      row => <Item user={row.user} message={row.message} rate={row.rate} key={row.id} />
-    );
-
     const messageElement = React.createRef();
     const rateElement = React.createRef();
 
@@ -26,6 +22,10 @@ const ReviewsList = (props) => {
         rateElement.current.value = '';
     };
   
+    const reviewsElements = props.state.map( 
+      row => <ReviewsListItem user={row.user} message={row.message} rate={row.rate} key={row.id} />
+    );
+
     return (
         <div className={style.reviews}>
             <h3>Отзывы</h3>

@@ -1,9 +1,9 @@
 
-import style from './style.module.css'
+import style from './Book.module.css'
 
 import imgBookDefault from './book.svg';
 
-import ReviewsList from '../ReviewsList';
+import ReviewsList from '../ReviewsList/ReviewsList';
 
 import { useParams } from 'react-router-dom';
 

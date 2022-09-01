@@ -1,10 +1,10 @@
-import style from './style.module.css'
+import style from './AuthorsList.module.css'
 
-import Item from './Item';
+import AuthorsListItem from './AuthorsListItem';
 
 const Authors = (props) => {
   const authorsElements = props.state.authors.map( 
-    row => <Item author={row.author} countBooks={row.countBooks} id={row.id} key={row.id} />
+    row => <AuthorsListItem author={row.author} countBooks={row.countBooks} id={row.id} key={row.id} />
   );
 
   return (

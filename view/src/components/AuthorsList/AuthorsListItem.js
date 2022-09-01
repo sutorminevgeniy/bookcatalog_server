@@ -1,10 +1,10 @@
-import style from './style.module.css'
+import style from './AuthorsList.module.css'
 
 import imgAuthorDefault from './author.svg';
 
 import { NavLink } from 'react-router-dom';
 
-const Item = (props) => {
+const AuthorsListItem = (props) => {
   return (
     <div className={style.author}>
       <NavLink to="/author/1" className={style.image}><img src={imgAuthorDefault} alt=""/></NavLink>
@@ -14,4 +14,4 @@ const Item = (props) => {
   );
 };
 
-export default Item;
+export default AuthorsListItem;

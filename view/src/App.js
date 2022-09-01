@@ -1,12 +1,13 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 import './App.css';
-import Header from './components/Header';
-import Footer from './components/Footer';
 
-import BooksList from './components/BooksList';
-import Book from './components/Book';
-import AuthorsList from './components/AuthorsList';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
+
+import BooksList from './components/BooksList/BooksList';
+import Book from './components/Book/Book';
+import AuthorsList from './components/AuthorsList/AuthorsList';
 import Filter from './components/Filter';
 
 

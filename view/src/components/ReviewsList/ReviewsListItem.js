@@ -1,6 +1,6 @@
-import style from './style.module.css';
+import style from './ReviewsList.module.css';
 
-const Item = (props) => {
+const ReviewsListItem = (props) => {
     return (
         <div className={style.reviewItem}>
             <div className={style.user}>{props.user}</div>
@@ -10,4 +10,4 @@ const Item = (props) => {
     );
 };
 
-export default Item;
+export default ReviewsListItem;

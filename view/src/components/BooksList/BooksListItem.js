@@ -1,10 +1,10 @@
-import style from './style.module.css'
+import style from './BooksList.module.css'
 
 import imgBookDefault from './book.svg';
 
 import { NavLink } from 'react-router-dom';
 
-const Item = (props) => {
+const BooksListItem = (props) => {
   return (
     <div className={style.book}>
       <NavLink to={"/book/" + props.id} className={style.image}><img src={imgBookDefault} alt=""/></NavLink>
@@ -14,4 +14,4 @@ const Item = (props) => {
   );
 };
 
-export default Item;
+export default BooksListItem;
