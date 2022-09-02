@@ -4,7 +4,7 @@ import style from './BooksList.module.css'
 
 import BooksListItem from './BooksListItem';
 
-import {addBookCreator} from '../../redux/state';
+import {addBookCreator} from '../../redux/booksList-reducer';
 
 const BooksList = (props) => {
   const nameElement = React.createRef();

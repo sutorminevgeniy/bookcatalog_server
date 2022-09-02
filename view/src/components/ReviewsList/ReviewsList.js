@@ -4,7 +4,7 @@ import style from './ReviewsList.module.css';
 
 import ReviewsListItem from './ReviewsListItem';
 
-import {addReviewCreator} from '../../redux/state';
+import {addReviewCreator} from '../../redux/book-reducer';
 
 const ReviewsList = (props) => {
     const messageElement = React.createRef();

@@ -1,5 +1,6 @@
-const ADD_REVIEW = 'ADD-REVIEW';
-const ADD_BOOK = 'ADD-BOOK';
+import bookReducer from './book-reducer';
+import booksListReducer from './booksList-reducer';
+import authorListReducer from './authorsList-reducer';
 
 // Хранилище - управляет состоянием
 const store = {
@@ -43,46 +44,13 @@ const store = {
 
     // Функция запускающая различные изменеия состояния приложения
     dispatch(action) { // {type; 'ADD-REVIEW'}
-        if (action.type === ADD_REVIEW) { // добавление отзыва в часности
-            const newReview = { 
-                user: "Пользователь Admin",
-                message: action.message,
-                rate: action.rate,
-                id: this._state.bookPage.reviews.length + 1 };
-            
-            this._state.bookPage.reviews.push(newReview);
-    
-            this._callSubscriber();            
-        }
-        else if (action.type === ADD_BOOK) {
-            const newBook = { 
-                name: action.name,
-                author: action.author,
-                description: action.description,
-                id: this._state.booksListPage.books.length + 1 };
-            
-            this._state.booksListPage.books.push(newBook);
-    
-            this._callSubscriber();         
-        }
-    },
-}
+        // Разделение логики для разных частей состояния
+        this._state.bookPage = bookReducer(this._state.bookPage, action);
+        this._state.booksListPage = booksListReducer(this._state.booksListPage, action);
+        this._state.authorsListPage = authorListReducer(this._state.authorsListPage, action);
 
-// Функции создания action для dispatch
-export const addReviewCreator = (message, rate) => {
-    return {
-        type: ADD_REVIEW,
-        message,
-        rate,
-    }
-}
-export const addBookCreator = (name, author, description) => {
-    return {
-        type: ADD_BOOK,
-        name,
-        author,
-        description,
-    }
+        this._callSubscriber();            
+    },
 }
 
 export default store;
