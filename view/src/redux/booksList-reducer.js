@@ -1,6 +1,14 @@
 const ADD_BOOK = 'ADD-BOOK';
 
-const booksListReducer = (state, action) => {
+const initialState = {
+    books: [
+        { name: "Книга 1", author: "Автор 1", id: "1" },
+        { name: "Книга 2", author: "Автор 2", id: "2" },
+        { name: "Книга 3", author: "Автор 3", id: "3" },
+    ],
+};
+
+const booksListReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_BOOK:
             const newBook = { 
