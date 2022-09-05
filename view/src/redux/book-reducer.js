@@ -2,7 +2,7 @@ const ADD_REVIEW = 'ADD-REVIEW';
 
 // Начальное состояние приложения
 const initialState = {
-    book: { name: "Книга 1", author: "Автор 1", description: "", id: "1" },
+    book: { name: "Книга", author: "Автор", description: "Хорошая книга", id: "1" },
     reviews: [
         { user: "Пользователь 1", message: "Отзыв о книге 1", rate: "5", id: "1" },
         { user: "Пользователь 2", message: "Отзыв о книге 1", rate: "4", id: "2" },

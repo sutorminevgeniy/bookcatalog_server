@@ -29,8 +29,7 @@ function App(props) {
               <Route path='/books' element={<BooksListContainer />} />
               <Route path='/book/:id' element={<BookContainer />} />
               <Route path='/authors' element={<AuthorsListContainer />} />
-              <Route path="*" element={<p>Такой страницы еще нет!</p>}
-              />
+              <Route path="*" element={<p>Такой страницы еще нет!</p>} />
             </Routes>
           </div>        
         </main>

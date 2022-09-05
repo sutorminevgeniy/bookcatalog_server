@@ -13,12 +13,10 @@ const Book = (props) => {
 
   return (
     <div className="books">
-      <h1>Книга {id}</h1>
-      <div>Автор {id}</div>
+      <h1>{props.book.name} {id}</h1>
+      <div>{props.book.author}</div>
       <img src={imgBookDefault} alt=""/>
-      <div className={style.bookList}>
-        Описание книги {id}
-      </div>
+      <div className={style.bookList}>{props.book.description}</div>
       <div>
         <ReviewsListContainer />
       </div>
