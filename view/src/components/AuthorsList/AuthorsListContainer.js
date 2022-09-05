@@ -1,19 +1,13 @@
-import StoreContext from '../../StoreContext';
+import {connect} from 'react-redux';
+
 import AuthorsList from './AuthorsList';
 
-const AuthorsListContainer = () => {
-  return (
-    <StoreContext.Consumer>{
-      (store) => {
-        const state = store.getState();
-
-        return (
-          <AuthorsList
-            authors={state.authorsListPage.authors}/>     
-        )
-      }
-    }</StoreContext.Consumer>
-  );
+const mapStateToProps = (state) => {
+  return {
+    authors: state.authorsListPage.authors
+  };
 };
+
+const AuthorsListContainer = connect(mapStateToProps)(AuthorsList);
 
 export default AuthorsListContainer;

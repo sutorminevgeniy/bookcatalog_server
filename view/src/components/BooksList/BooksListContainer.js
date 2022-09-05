@@ -1,26 +1,24 @@
-import StoreContext from '../../StoreContext'; // Обертка для получения данных из context 
+import {connect} from 'react-redux';
+
 import BooksList from './BooksList';
 
 import {addBookCreator} from '../../redux/booksList-reducer';
 
-const BooksListContainer = () => {
-  return (
-    <StoreContext.Consumer>{
-      (store) => {
-        const state = store.getState();
-
-        const addBook = (name, author, description) => {
-          const action = addBookCreator(name, author, description);
-          store.dispatch(action);
-        }
-
-        return (
-          <BooksList addBook={addBook}
-            books={state.booksListPage.books} />        
-        )
-      }
-    }</StoreContext.Consumer>
-  );
+const mapStateToProps = (state) => {
+  return {
+    books: state.booksListPage.books
+  };
 };
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addBook: (name, author, description) => {
+      const action = addBookCreator(name, author, description);
+      dispatch(action);
+    }
+  };
+}
+
+const BooksListContainer = connect(mapStateToProps, mapDispatchToProps)(BooksList);
 
 export default BooksListContainer;

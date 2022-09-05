@@ -11,15 +11,18 @@ const initialState = {
 const booksListReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_BOOK:
+            const copyState = {...state};
+            copyState.books = [...state.books];
+
             const newBook = { 
                 name: action.name,
                 author: action.author,
                 description: action.description,
-                id: state.books.length + 1 };
+                id: copyState.books.length + 1 };
             
-            state.books.push(newBook);
+            copyState.books.push(newBook);
             
-            return state
+            return copyState
         default:    
             return state
     } 
