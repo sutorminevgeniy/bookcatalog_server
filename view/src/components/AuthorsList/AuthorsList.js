@@ -2,8 +2,8 @@ import style from './AuthorsList.module.css'
 
 import AuthorsListItem from './AuthorsListItem';
 
-const Authors = (props) => {
-  const authorsElements = props.state.authors.map( 
+const AuthorsList = (props) => {
+  const authorsElements = props.authors.map( 
     row => <AuthorsListItem author={row.author} countBooks={row.countBooks} id={row.id} key={row.id} />
   );
 
@@ -16,4 +16,4 @@ const Authors = (props) => {
   );
 };
 
-export default Authors;
+export default AuthorsList;

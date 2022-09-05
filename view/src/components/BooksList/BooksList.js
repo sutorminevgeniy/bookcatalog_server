@@ -4,7 +4,6 @@ import style from './BooksList.module.css'
 
 import BooksListItem from './BooksListItem';
 
-import {addBookCreator} from '../../redux/booksList-reducer';
 
 const BooksList = (props) => {
   const nameElement = React.createRef();
@@ -16,16 +15,14 @@ const BooksList = (props) => {
     const author = authorElement.current.value;
     const description = descriptionElement.current.value;
 
-    const action = addBookCreator(name, author, description);
-
-    props.dispatch(action);
+    props.addBook(name, author, description);
 
     nameElement.current.value = '';
     authorElement.current.value = '';
     descriptionElement.current.value = '';
   }
 
-  const booksElements = props.state.books.map( 
+  const booksElements = props.books.map( 
     row => <BooksListItem name={row.name} author={row.author} id={row.id} key={row.id} />
   );
 

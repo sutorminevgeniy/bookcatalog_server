@@ -5,9 +5,9 @@ import './App.css';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 
-import BooksList from './components/BooksList/BooksList';
+import BooksListContainer from './components/BooksList/BooksListContainer';
 import Book from './components/Book/Book';
-import AuthorsList from './components/AuthorsList/AuthorsList';
+import AuthorsListContainer from './components/AuthorsList/AuthorsListContainer';
 import Filter from './components/Filter';
 
 
@@ -25,15 +25,14 @@ function App(props) {
           </aside>
 
           <div className='content'>
-            <Routes>
+            <Routes>                
+              <Route path='/books' element={<BooksListContainer 
+                store={props.store} />} />
               <Route path='/book/:id' element={<Book 
-                state={props.state.bookPage}
-                dispatch={props.dispatch} />} />                
-              <Route path='/books' element={<BooksList 
-                state={props.state.booksListPage}
+                state={props.store.getState().bookPage}
                 dispatch={props.dispatch} />} />
-              <Route path='/authors' element={<AuthorsList 
-                state={props.state.authorsListPage} />} />
+              <Route path='/authors' element={<AuthorsListContainer 
+                store={props.store} />} />
               <Route path="*" element={<p>Такой страницы еще нет!</p>}
               />
             </Routes>
