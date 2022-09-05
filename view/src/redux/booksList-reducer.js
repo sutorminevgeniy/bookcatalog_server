@@ -1,5 +1,6 @@
 const ADD_BOOK = 'ADD-BOOK';
 
+// Начальное состояние приложения
 const initialState = {
     books: [
         { name: "Книга 1", author: "Автор 1", id: "1" },
@@ -8,21 +9,24 @@ const initialState = {
     ],
 };
 
+// Функция запускающая различные изменеия состояния приложения
 const booksListReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_BOOK:
-            const copyState = {...state};
-            copyState.books = [...state.books];
-
             const newBook = { 
                 name: action.name,
                 author: action.author,
                 description: action.description,
-                id: copyState.books.length + 1 };
+                id: state.books.length + 1
+            };
             
-            copyState.books.push(newBook);
-            
-            return copyState
+            return {
+                ...state,
+                books: [
+                    ...state.books,
+                    newBook
+                ]
+            }
         default:    
             return state
     } 

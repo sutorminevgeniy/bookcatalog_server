@@ -1,5 +1,6 @@
 const ADD_REVIEW = 'ADD-REVIEW';
 
+// Начальное состояние приложения
 const initialState = {
     book: { name: "Книга 1", author: "Автор 1", description: "", id: "1" },
     reviews: [
@@ -9,6 +10,7 @@ const initialState = {
     ],
 };
 
+// Функция запускающая различные изменеия состояния приложения
 const bookReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_REVIEW: // добавление отзыва в часности
@@ -16,11 +18,16 @@ const bookReducer = (state = initialState, action) => {
                 user: "Пользователь Admin",
                 message: action.message,
                 rate: action.rate,
-                id: state.reviews.length + 1 };
+                id: state.reviews.length + 1
+            };
             
-            state.reviews.push(newReview);
-            
-            return state
+            return {
+                ...state,
+                reviews: [
+                    ...state.reviews,
+                    newReview
+                ]
+            }
         default:    
             return state
     } 

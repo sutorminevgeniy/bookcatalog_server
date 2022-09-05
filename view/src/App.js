@@ -6,7 +6,7 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 
 import BooksListContainer from './components/BooksList/BooksListContainer';
-import Book from './components/Book/Book';
+import BookContainer from './components/Book/BookContainer';
 import AuthorsListContainer from './components/AuthorsList/AuthorsListContainer';
 import Filter from './components/Filter';
 
@@ -27,9 +27,7 @@ function App(props) {
           <div className='content'>
             <Routes>                
               <Route path='/books' element={<BooksListContainer />} />
-              <Route path='/book/:id' element={<Book 
-                state={props.store.getState().bookPage}
-                dispatch={props.dispatch} />} />
+              <Route path='/book/:id' element={<BookContainer />} />
               <Route path='/authors' element={<AuthorsListContainer />} />
               <Route path="*" element={<p>Такой страницы еще нет!</p>}
               />

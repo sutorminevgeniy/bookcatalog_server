@@ -3,11 +3,11 @@ import style from './Book.module.css'
 
 import imgBookDefault from './book.svg';
 
-import ReviewsList from '../ReviewsList/ReviewsList';
+import ReviewsListContainer from '../ReviewsList/ReviewsListContainer';
 
 import { useParams } from 'react-router-dom';
 
-const BooksList = (props) => {
+const Book = (props) => {
   // Получение :id параметра из URL.
   let { id } = useParams();
 
@@ -20,12 +20,10 @@ const BooksList = (props) => {
         Описание книги {id}
       </div>
       <div>
-        <ReviewsList
-          state={props.state.reviews}
-          dispatch={props.dispatch}  />
+        <ReviewsListContainer />
       </div>
     </div>
   );
 };
 
-export default BooksList;
+export default Book;

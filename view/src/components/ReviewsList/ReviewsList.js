@@ -4,7 +4,6 @@ import style from './ReviewsList.module.css';
 
 import ReviewsListItem from './ReviewsListItem';
 
-import {addReviewCreator} from '../../redux/book-reducer';
 
 const ReviewsList = (props) => {
     const messageElement = React.createRef();
@@ -14,15 +13,13 @@ const ReviewsList = (props) => {
         const message = messageElement.current.value;
         const rate = rateElement.current.value;
 
-        const action = addReviewCreator(message, rate);
-
-        props.dispatch(action);
+        props.addReview(message, rate);
 
         messageElement.current.value = '';
         rateElement.current.value = '';
     };
   
-    const reviewsElements = props.state.map( 
+    const reviewsElements = props.reviews.map( 
       row => <ReviewsListItem user={row.user} message={row.message} rate={row.rate} key={row.id} />
     );
 

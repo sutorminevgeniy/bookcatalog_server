@@ -6,6 +6,7 @@ const initialState = {
     ],        
 };
 
+// Функция запускающая различные изменеия состояния приложения
 const authorListReducer = (state = initialState, action) => {
     return state
 }
