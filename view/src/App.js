@@ -26,13 +26,11 @@ function App(props) {
 
           <div className='content'>
             <Routes>                
-              <Route path='/books' element={<BooksListContainer 
-                store={props.store} />} />
+              <Route path='/books' element={<BooksListContainer />} />
               <Route path='/book/:id' element={<Book 
                 state={props.store.getState().bookPage}
                 dispatch={props.dispatch} />} />
-              <Route path='/authors' element={<AuthorsListContainer 
-                store={props.store} />} />
+              <Route path='/authors' element={<AuthorsListContainer />} />
               <Route path="*" element={<p>Такой страницы еще нет!</p>}
               />
             </Routes>
