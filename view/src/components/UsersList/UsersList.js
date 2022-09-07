@@ -2,10 +2,8 @@ import React from 'react';
 import axios from 'axios';
 
 class UsersList extends React.Component {
-    constructor(props) {
-        super(props);
-        
-        if (this.props.users.length === 0) {
+    componentDidMount() {
+         if (this.props.users.length === 0) {
             axios.get('https://social-network.samuraijs.com/api/1.0/users')
                 .then(response => {
                     console.log(response);
