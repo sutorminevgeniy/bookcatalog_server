@@ -1,10 +1,18 @@
+import axios from 'axios';
+
 const UsersList = (props) => {
     if (props.users.length === 0) {
-        props.setUsers([
-            { id: '1', login: 'admin', password: '',  name: 'Босс', email: '', isAdmin: true},
-            { id: '2', login: 'user1', password: '',  name: 'Пользователь1', email: '', isAdmin: false},
-            { id: '3', login: 'user2', password: '',  name: 'Пользователь2', email: '', isAdmin: false},
-        ])
+        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+            .then(response => {
+                console.log(response);
+
+                props.setUsers(response.data.items)
+                // props.setUsers([
+                //     { id: '1', login: 'admin', password: '',  name: 'Босс', email: '', isAdmin: true},
+                //     { id: '2', login: 'user1', password: '',  name: 'Пользователь1', email: '', isAdmin: false},
+                //     { id: '3', login: 'user2', password: '',  name: 'Пользователь2', email: '', isAdmin: false},
+                // ]);
+            })
     }
     
     return (

@@ -4,12 +4,9 @@ const REMOVE_ACCESS = 'REMOVE-ACCESS ';
 const SET_USERS = 'SET-USERS';
 
 // Начальное состояние приложения
+// [{ id: '1', login: 'admin', password: '',  name: 'Босс', email: '', isAdmin: true}]
 const initialState = {
-    users: [
-        // { id: '1', login: 'admin', password: '',  name: 'Босс', email: '', isAdmin: true},
-        // { id: '2', login: 'user1', password: '',  name: 'Пользователь1', email: '', isAdmin: false},
-        // { id: '3', login: 'user2', password: '',  name: 'Пользователь2', email: '', isAdmin: false},
-    ],
+    users: [],
 };
 
 // Функция запускающая различные изменеия состояния приложения
