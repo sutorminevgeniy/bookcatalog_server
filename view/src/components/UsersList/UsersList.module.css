@@ -1,0 +1,12 @@
+.selectedPage {
+    color: red;
+    font-weight: bold;
+}
+.paginate {
+    margin: 10px auto;
+}
+.paginate span {
+    display: inline-block;
+    margin: 0 2px;
+    cursor: pointer;
+}

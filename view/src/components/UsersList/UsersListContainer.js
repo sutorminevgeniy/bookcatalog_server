@@ -1,13 +1,21 @@
 import {connect} from 'react-redux';
 
-import {addUserCreator, giveAccessCreator , removeAccessCreator, setUsersCreator} from '../../redux/usersList-reducer'
+import {
+    addUserCreator,
+    giveAccessCreator,
+    removeAccessCreator,
+    setUsersCreator,
+    setCurrentPageCreator } from '../../redux/usersList-reducer'
 
 import UsersList from './UsersList'
 
 
 const mapStateToProps = (state) => {
     return {
-        users: state.usersListPage.users
+        users: state.usersListPage.users,
+        pageSize: state.usersListPage.pageSize,
+        totalUserCount: state.usersListPage.totalUserCount,
+        currentPage: state.usersListPage.currentPage,
     }
 };
 const mapDispatchToProps = (dispatch) => {
@@ -21,8 +29,11 @@ const mapDispatchToProps = (dispatch) => {
         removeAccess: (id) => {
             dispatch(removeAccessCreator(id));
         },
-        setUsers: (users) => {
-            dispatch(setUsersCreator(users));
+        setUsers: (users, totalUserCount) => {
+            dispatch(setUsersCreator(users, totalUserCount));
+        },
+        setCurrentPage: (currentPage) => {
+            dispatch(setCurrentPageCreator(currentPage));
         }
     }
 }
