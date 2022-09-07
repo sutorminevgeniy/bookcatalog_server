@@ -8,10 +8,11 @@ import Footer from './components/Footer/Footer';
 import BooksListContainer from './components/BooksList/BooksListContainer';
 import BookContainer from './components/Book/BookContainer';
 import AuthorsListContainer from './components/AuthorsList/AuthorsListContainer';
+import UsersListContainer from './components/UsersList/UsersListContainer';
 import Filter from './components/Filter';
 
 
-function App(props) {
+function App() {
   return (
     <BrowserRouter>
       <div className="wrapper">
@@ -29,6 +30,7 @@ function App(props) {
               <Route path='/books' element={<BooksListContainer />} />
               <Route path='/book/:id' element={<BookContainer />} />
               <Route path='/authors' element={<AuthorsListContainer />} />
+              <Route path='/users' element={<UsersListContainer />} />
               <Route path="*" element={<p>Такой страницы еще нет!</p>} />
             </Routes>
           </div>        

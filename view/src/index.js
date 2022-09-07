@@ -13,11 +13,12 @@ const container = document.getElementById('root');
 const root = createRoot(container); // createRoot(container!) if you use TypeScript
 
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <Provider store={store}>
-      <App store={store} dispatch={store.dispatch.bind(store)} />
+      <App />
     </Provider>
-  </React.StrictMode>);
+  // </React.StrictMode>
+  );
 
 
 // If you want to start measuring performance in your app, pass a function
