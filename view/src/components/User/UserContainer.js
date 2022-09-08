@@ -1,5 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {
+  useLocation,
+  useNavigate,
+  useParams
+} from 'react-router-dom';
 import axios from 'axios';
 
 import {setUser} from '../../redux/user-reducer';
@@ -9,7 +14,9 @@ import User from './User';
 
 class UserContainer extends React.Component {
   componentDidMount() {
-    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
+    const userId = this.props.router.params.id;
+
+    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
       .then(response => {
           this.props.setUser({
             name: response.data.fullName
@@ -30,5 +37,20 @@ const mapStateToProps = (state) => {
   };
 };
 
+function withRouter(Component) {
+  function ComponentWithRouterProp(props) {
+    let location = useLocation();
+    let navigate = useNavigate();
+    let params = useParams();
+    return (
+      <Component
+        {...props}
+        router={{ location, navigate, params }}
+      />
+    );
+  }
 
-export default connect(mapStateToProps, {setUser})(UserContainer);
+  return ComponentWithRouterProp;
+}
+
+export default connect(mapStateToProps, {setUser})(withRouter(UserContainer));
