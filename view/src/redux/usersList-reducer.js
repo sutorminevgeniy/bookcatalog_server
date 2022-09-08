@@ -2,7 +2,9 @@ const ADD_USER = 'ADD-USER';
 const GIVE_ACCESS = 'GIVE-ACCESS';
 const REMOVE_ACCESS = 'REMOVE-ACCESS ';
 const SET_USERS = 'SET-USERS';
-const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE'
+const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
+const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING'
+
 
 // Начальное состояние приложения
 // [{ id: '1', login: 'admin', password: '',  name: 'Босс', email: '', isAdmin: true}]
@@ -11,6 +13,7 @@ const initialState = {
     pageSize: 10,
     totalUserCount: 0,
     currentPage: 1,
+    isFetching: false,
 };
 
 // Функция запускающая различные изменеия состояния приложения
@@ -69,6 +72,11 @@ const usersListReducer = (state = initialState, action) => {
                 ...state,
                 currentPage: action.currentPage,
             }
+        case TOGGLE_IS_FETCHING:
+            return {
+                ...state,
+                isFetching: action.isFetching,
+            }
         default:    
             return state
     } 
@@ -107,6 +115,12 @@ export const setCurrentPageCreator = (currentPage) => {
     return {
         type: SET_CURRENT_PAGE,
         currentPage,
+    }
+}
+export const toggleIsFetchingCreator = (isFetching) => {
+    return {
+        type: TOGGLE_IS_FETCHING,
+        isFetching,
     }
 }
 
