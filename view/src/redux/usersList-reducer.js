@@ -83,7 +83,7 @@ const usersListReducer = (state = initialState, action) => {
 }
 
 // Функции создания action для dispatch
-export const addUserCreator = (login, password, name, email) => {
+export const addUser = (login, password, name, email) => {
     return {
         type: ADD_USER,
         login,
@@ -92,32 +92,32 @@ export const addUserCreator = (login, password, name, email) => {
         email,
     }
 }
-export const giveAccessCreator = (id) => {
+export const giveAccess = (id) => {
     return {
         type: GIVE_ACCESS,
         id,
     }
 }
-export const removeAccessCreator = (id) => {
+export const removeAccess = (id) => {
     return {
         type: REMOVE_ACCESS,
         id,
     }
 }
-export const setUsersCreator = (users, totalUserCount) => {
+export const setUsers = (users, totalUserCount) => {
     return {
         type: SET_USERS,
         users,
         totalUserCount,
     }
 }
-export const setCurrentPageCreator = (currentPage) => {
+export const setCurrentPage = (currentPage) => {
     return {
         type: SET_CURRENT_PAGE,
         currentPage,
     }
 }
-export const toggleIsFetchingCreator = (isFetching) => {
+export const toggleIsFetching = (isFetching) => {
     return {
         type: TOGGLE_IS_FETCHING,
         isFetching,

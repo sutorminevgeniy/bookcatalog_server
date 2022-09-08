@@ -3,12 +3,12 @@ import {connect} from 'react-redux';
 import axios from 'axios';
 
 import {
-    addUserCreator,
-    giveAccessCreator,
-    removeAccessCreator,
-    setUsersCreator,
-    setCurrentPageCreator,
-    toggleIsFetchingCreator } from '../../redux/usersList-reducer';
+    addUser,
+    giveAccess,
+    removeAccess,
+    setUsers,
+    setCurrentPage,
+    toggleIsFetching } from '../../redux/usersList-reducer';
 
 import UsersList from './UsersList';
 import Preloader from '../Preloader/Preloader';
@@ -41,13 +41,6 @@ class UsersListContainer extends React.Component {
     }
 
     render() {
-        let pagesCount = Math.ceil(this.props.totalUserCount / this.props.pageSize);
-
-        let pages = [];
-        for (let i = 1; i <= pagesCount; i++) {
-            pages.push(i);
-        }
-        console.log(this.props)
         return ( <>
             { this.props.isFetching ? <Preloader /> : null }
             <UsersList
@@ -72,27 +65,34 @@ const mapStateToProps = (state) => {
         isFetching: state.usersListPage.isFetching,
     }
 };
-const mapDispatchToProps = (dispatch) => {
-    return {
-        addUser: (login, password, name, email) => {
-            dispatch(addUserCreator(login, password,  name, email));
-        },
-        giveAccess: (id) => {
-            dispatch(giveAccessCreator(id));
-        },
-        removeAccess: (id) => {
-            dispatch(removeAccessCreator(id));
-        },
-        setUsers: (users, totalUserCount) => {
-            dispatch(setUsersCreator(users, totalUserCount));
-        },
-        setCurrentPage: (currentPage) => {
-            dispatch(setCurrentPageCreator(currentPage));
-        },
-        toggleIsFetching: (isFetching) => {
-            dispatch(toggleIsFetchingCreator(isFetching));
-        }
-    }
-}
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         addUser: (login, password, name, email) => {
+//             dispatch(addUser(login, password,  name, email));
+//         },
+//         giveAccess: (id) => {
+//             dispatch(giveAccess(id));
+//         },
+//         removeAccess: (id) => {
+//             dispatch(removeAccess(id));
+//         },
+//         setUsers: (users, totalUserCount) => {
+//             dispatch(setUsers(users, totalUserCount));
+//         },
+//         setCurrentPage: (currentPage) => {
+//             dispatch(setCurrentPage(currentPage));
+//         },
+//         toggleIsFetching: (isFetching) => {
+//             dispatch(toggleIsFetching(isFetching));
+//         }
+//     }
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersListContainer);
+export default connect(mapStateToProps, {
+        addUser, // сокращ>нная запись mapDispatchToProps() ф-и зкоментированной выше
+        giveAccess,
+        removeAccess,
+        setUsers,
+        setCurrentPage,
+        toggleIsFetching
+    })(UsersListContainer);
