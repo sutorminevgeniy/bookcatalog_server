@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 import style from './UsersList.module.css'
 
@@ -27,7 +28,7 @@ const UsersList = (props) => {
                     {props.users.map((user) => {
                         return (
                             <tr key={user.id}>
-                                <td>{user.name}</td>
+                                <td><NavLink to={'/user/' + user.id}>{user.name}</NavLink></td>
                                 <td>{user.login}</td>
                                 <td>{user.email}</td>
                                 <td>{user.isAdmin ? 'Админестратор' : 'Гость'}</td>

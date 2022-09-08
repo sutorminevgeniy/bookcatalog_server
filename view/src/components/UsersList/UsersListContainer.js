@@ -89,7 +89,7 @@ const mapStateToProps = (state) => {
 // }
 
 export default connect(mapStateToProps, {
-        addUser, // сокращ>нная запись mapDispatchToProps() ф-и зкоментированной выше
+        addUser, // сокращённая запись mapDispatchToProps() ф-и зкоментированной выше
         giveAccess,
         removeAccess,
         setUsers,
