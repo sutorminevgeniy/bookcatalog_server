@@ -3,7 +3,7 @@ import style from './Header.module.css';
 
 import { NavLink } from 'react-router-dom';
 
-const Header = () => {
+const Header = (props) => {
   return (
     <div className={style.header}>
       <NavLink className={style.logo} to="/">
@@ -32,6 +32,10 @@ const Header = () => {
             className={({ isActive }) => isActive ? style.active : undefined }>О каталоге</NavLink>
         </li>
       </ul>
+
+      <div className={style.loginBlock}>
+        {props.isAuth ? props.login : <NavLink to={'/login'}>Login</NavLink>}
+      </div>
     </div>
   );
 };

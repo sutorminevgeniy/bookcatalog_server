@@ -2,7 +2,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 import './App.css';
 
-import Header from './components/Header/Header';
+import HeaderContainer from './components/Header/HeaderContainer';
 import Footer from './components/Footer/Footer';
 
 import BooksListContainer from './components/BooksList/BooksListContainer';
@@ -18,7 +18,7 @@ function App() {
     <BrowserRouter>
       <div className="wrapper">
         <header>
-          <Header />
+          <HeaderContainer />
         </header>
 
         <main>
