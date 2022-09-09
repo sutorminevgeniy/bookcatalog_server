@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import axios from 'axios';
 
 import {
     addUser,
@@ -9,6 +8,7 @@ import {
     setUsers,
     setCurrentPage,
     toggleIsFetching } from '../../redux/usersList-reducer';
+import {usersAPI} from '../../api/api';
 
 import UsersList from './UsersList';
 import Preloader from '../Preloader/Preloader';
@@ -17,11 +17,10 @@ class UsersListContainer extends React.Component {
     componentDidMount() {
         if (this.props.users.length === 0) {
             this.props.toggleIsFetching(true);
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
-                withCredentials: true
-            })
-                .then(response => {
-                    this.props.setUsers(response.data.items, response.data.totalCount);
+
+            usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+                .then(data => {
+                    this.props.setUsers(data.items, data.totalCount);
                     // this.props.setUsers([
                     //     { id: '1', login: 'admin', password: '',  name: 'Босс', email: '', isAdmin: true},
                     //     { id: '2', login: 'user1', password: '',  name: 'Пользователь1', email: '', isAdmin: false},
@@ -35,24 +34,19 @@ class UsersListContainer extends React.Component {
     onPageChanged = (page) => {
         this.props.toggleIsFetching(true);
         this.props.setCurrentPage(page);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`, {
-            withCredentials: true
-        })
-        .then(response => {
-            this.props.setUsers(response.data.items, response.data.totalCount);
-            this.props.toggleIsFetching(false);
-        });
+
+        usersAPI.getUsers(page, this.props.pageSize)
+            .then(data => {
+                this.props.setUsers(data.items, data.totalCount);
+                this.props.toggleIsFetching(false);
+            });
     }
     giveAccess = (id) => {
         this.props.toggleIsFetching(true);
-        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {}, {
-            withCredentials: true,
-            headers: {
-                'API-KEY': '3800a16a-e2c0-4336-8594-268b9cc94411'
-            }
-        })
-            .then(response => {
-                if (response.data.resultCode === 0) {
+        
+        usersAPI.postAccess(id)
+            .then(data => {
+                if (data.resultCode === 0) {
                     this.props.giveAccess(id);             
                 }
                 this.props.toggleIsFetching(false);       
@@ -63,14 +57,10 @@ class UsersListContainer extends React.Component {
     }
     removeAccess = (id) => {
         this.props.toggleIsFetching(true);
-        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {
-            withCredentials: true,
-            headers: {
-                'API-KEY': '3800a16a-e2c0-4336-8594-268b9cc94411'
-            }
-        })
-            .then(response => {
-                if (response.data.resultCode === 0) {
+
+        usersAPI.deleteAccess(id)
+            .then(data => {
+                if (data.resultCode === 0) {
                     this.props.removeAccess(id);                 
             }
                 this.props.toggleIsFetching(false);   

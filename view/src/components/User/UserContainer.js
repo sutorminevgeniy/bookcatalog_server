@@ -5,7 +5,8 @@ import {
   useNavigate,
   useParams
 } from 'react-router-dom';
-import axios from 'axios';
+
+import {usersAPI} from '../../api/api';
 
 import {setUser} from '../../redux/user-reducer';
 
@@ -16,10 +17,10 @@ class UserContainer extends React.Component {
   componentDidMount() {
     const userId = this.props.router.params.id;
 
-    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-      .then(response => {
+    usersAPI.getUser(userId)
+      .then(data => {
           this.props.setUser({
-            name: response.data.fullName
+            name: data.fullName
           });
       });
   }
