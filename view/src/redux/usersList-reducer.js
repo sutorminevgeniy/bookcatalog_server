@@ -64,7 +64,10 @@ const usersListReducer = (state = initialState, action) => {
         case SET_USERS:
             return {
                 ...state,
-                users: [...action.users],
+                // users: [...action.users], 
+                users: action.users.map(user => (
+                    {...user,
+                        isAdmin: user.followed})), // !!! для тестовой базы
                 totalUserCount: action.totalUserCount,
             }
         case SET_CURRENT_PAGE:

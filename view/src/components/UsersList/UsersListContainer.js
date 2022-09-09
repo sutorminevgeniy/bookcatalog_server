@@ -17,7 +17,9 @@ class UsersListContainer extends React.Component {
     componentDidMount() {
         if (this.props.users.length === 0) {
             this.props.toggleIsFetching(true);
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
+                withCredentials: true
+            })
                 .then(response => {
                     this.props.setUsers(response.data.items, response.data.totalCount);
                     // this.props.setUsers([
@@ -33,11 +35,49 @@ class UsersListContainer extends React.Component {
     onPageChanged = (page) => {
         this.props.toggleIsFetching(true);
         this.props.setCurrentPage(page);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`, {
+            withCredentials: true
+        })
         .then(response => {
             this.props.setUsers(response.data.items, response.data.totalCount);
             this.props.toggleIsFetching(false);
         });
+    }
+    giveAccess = (id) => {
+        this.props.toggleIsFetching(true);
+        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {}, {
+            withCredentials: true,
+            headers: {
+                'API-KEY': '3800a16a-e2c0-4336-8594-268b9cc94411'
+            }
+        })
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    this.props.giveAccess(id);             
+                }
+                this.props.toggleIsFetching(false);       
+            })
+            .catch(() => {
+                this.props.toggleIsFetching(false);
+            });
+    }
+    removeAccess = (id) => {
+        this.props.toggleIsFetching(true);
+        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {
+            withCredentials: true,
+            headers: {
+                'API-KEY': '3800a16a-e2c0-4336-8594-268b9cc94411'
+            }
+        })
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    this.props.removeAccess(id);                 
+            }
+                this.props.toggleIsFetching(false);   
+            })
+            .catch(() => {
+                this.props.toggleIsFetching(false);
+            });
     }
 
     render() {
@@ -48,8 +88,8 @@ class UsersListContainer extends React.Component {
                 totalUserCount={this.props.totalUserCount}
                 pageSize={this.props.pageSize}
                 currentPage={this.props.currentPage}
-                removeAccess={this.props.removeAccess}
-                giveAccess={this.props.giveAccess}
+                removeAccess={this.removeAccess}
+                giveAccess={this.giveAccess}
                 onPageChanged={this.onPageChanged} />
         </>);        
     }
