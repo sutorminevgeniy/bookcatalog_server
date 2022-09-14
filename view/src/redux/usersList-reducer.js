@@ -1,3 +1,6 @@
+
+import {usersAPI} from '../api/api';
+
 const ADD_USER = 'ADD-USER';
 const GIVE_ACCESS = 'GIVE-ACCESS';
 const REMOVE_ACCESS = 'REMOVE-ACCESS ';
@@ -142,5 +145,54 @@ export const toggleIsChangingAccess = (isProgress, id) => {
         id,
     }
 }
+
+export const getUsers = (currentPage, pageSize) => {
+    return (dispatch) => {
+        dispatch(toggleIsFetching(true));
+
+        usersAPI.getUsers(currentPage, pageSize)
+            .then(data => {
+                dispatch(setUsers(data.items, data.totalCount));
+                // this.props.setUsers([
+                //     { id: '1', login: 'admin', password: '',  name: 'Босс', email: '', isAdmin: true},
+                //     { id: '2', login: 'user1', password: '',  name: 'Пользователь1', email: '', isAdmin: false},
+                //     { id: '3', login: 'user2', password: '',  name: 'Пользователь2', email: '', isAdmin: false},
+                // ], 3);
+                dispatch(toggleIsFetching(false));
+            });
+    }
+};
+export const postAccess = (id) => {
+    return (dispatch) => {
+        dispatch(toggleIsChangingAccess(true, id));
+        
+        usersAPI.postAccess(id)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(giveAccess(id));
+                }
+                dispatch(toggleIsChangingAccess(false, id));
+            })
+            .catch(() => {
+                dispatch(toggleIsChangingAccess(false, id));
+            });
+    };
+};
+export const deleteAccess = (id) => {
+    return (dispatch) => {
+        dispatch(toggleIsChangingAccess(true, id));
+
+        usersAPI.deleteAccess(id)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(removeAccess(id));
+            }
+                dispatch(toggleIsChangingAccess(false, id));
+            })
+            .catch(() => {
+                dispatch(toggleIsChangingAccess(false, id));
+            });
+        };
+};
 
 export default usersListReducer;
