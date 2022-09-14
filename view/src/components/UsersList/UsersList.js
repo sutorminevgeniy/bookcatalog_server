@@ -34,8 +34,12 @@ const UsersList = (props) => {
                                 <td>{user.isAdmin ? 'Админестратор' : 'Гость'}</td>
                                 <td>
                                     {user.isAdmin
-                                    ? (<button onClick={() => props.removeAccess(user.id)}>Запретить доступ</button>)
-                                    : (<button onClick={() => props.giveAccess(user.id)}>Разрешить доступ</button>)}
+                                    ? (<button
+                                            disabled={props.isChangingAccess.some(id => id === user.id)}
+                                            onClick={() => props.removeAccess(user.id)}>Запретить доступ</button>)
+                                    : (<button
+                                            disabled={props.isChangingAccess.some(id => id === user.id)}
+                                            onClick={() => props.giveAccess(user.id)}>Разрешить доступ</button>)}
                                 </td>
                             </tr>
                         );

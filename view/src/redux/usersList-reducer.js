@@ -3,7 +3,8 @@ const GIVE_ACCESS = 'GIVE-ACCESS';
 const REMOVE_ACCESS = 'REMOVE-ACCESS ';
 const SET_USERS = 'SET-USERS';
 const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
-const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING'
+const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
+const TOGGLE_IS_CHANGING_ACCESS = 'TOGGLE-IS-CHANGING-ACCESS';
 
 
 // Начальное состояние приложения
@@ -14,6 +15,7 @@ const initialState = {
     totalUserCount: 0,
     currentPage: 1,
     isFetching: false,
+    isChangingAccess: [],
 };
 
 // Функция запускающая различные изменеия состояния приложения
@@ -80,6 +82,13 @@ const usersListReducer = (state = initialState, action) => {
                 ...state,
                 isFetching: action.isFetching,
             }
+        case TOGGLE_IS_CHANGING_ACCESS:
+            return {
+                ...state,
+                isChangingAccess: action.isProgress
+                    ? [...state.isChangingAccess, action.id]
+                    : state.isChangingAccess.filter(id => id !== action.id),
+            }
         default:    
             return state
     } 
@@ -124,6 +133,13 @@ export const toggleIsFetching = (isFetching) => {
     return {
         type: TOGGLE_IS_FETCHING,
         isFetching,
+    }
+}
+export const toggleIsChangingAccess = (isProgress, id) => {
+    return {
+        type: TOGGLE_IS_CHANGING_ACCESS,
+        isProgress,
+        id,
     }
 }
 

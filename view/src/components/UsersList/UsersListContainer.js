@@ -7,7 +7,8 @@ import {
     removeAccess,
     setUsers,
     setCurrentPage,
-    toggleIsFetching } from '../../redux/usersList-reducer';
+    toggleIsFetching,
+    toggleIsChangingAccess } from '../../redux/usersList-reducer';
 import {usersAPI} from '../../api/api';
 
 import UsersList from './UsersList';
@@ -42,31 +43,31 @@ class UsersListContainer extends React.Component {
             });
     }
     giveAccess = (id) => {
-        this.props.toggleIsFetching(true);
+        this.props.toggleIsChangingAccess(true, id);
         
         usersAPI.postAccess(id)
             .then(data => {
                 if (data.resultCode === 0) {
                     this.props.giveAccess(id);             
                 }
-                this.props.toggleIsFetching(false);       
+                this.props.toggleIsChangingAccess(false, id);
             })
             .catch(() => {
-                this.props.toggleIsFetching(false);
+                this.props.toggleIsChangingAccess(false, id);
             });
     }
     removeAccess = (id) => {
-        this.props.toggleIsFetching(true);
+        this.props.toggleIsChangingAccess(true, id);
 
         usersAPI.deleteAccess(id)
             .then(data => {
                 if (data.resultCode === 0) {
                     this.props.removeAccess(id);                 
             }
-                this.props.toggleIsFetching(false);   
+                this.props.toggleIsChangingAccess(false, id);
             })
             .catch(() => {
-                this.props.toggleIsFetching(false);
+                this.props.toggleIsChangingAccess(false, id);
             });
     }
 
@@ -78,6 +79,7 @@ class UsersListContainer extends React.Component {
                 totalUserCount={this.props.totalUserCount}
                 pageSize={this.props.pageSize}
                 currentPage={this.props.currentPage}
+                isChangingAccess={this.props.isChangingAccess}
                 removeAccess={this.removeAccess}
                 giveAccess={this.giveAccess}
                 onPageChanged={this.onPageChanged} />
@@ -93,6 +95,7 @@ const mapStateToProps = (state) => {
         totalUserCount: state.usersListPage.totalUserCount,
         currentPage: state.usersListPage.currentPage,
         isFetching: state.usersListPage.isFetching,
+        isChangingAccess: state.usersListPage.isChangingAccess,
     }
 };
 // const mapDispatchToProps = (dispatch) => {
@@ -124,5 +127,6 @@ export default connect(mapStateToProps, {
         removeAccess,
         setUsers,
         setCurrentPage,
-        toggleIsFetching
+        toggleIsFetching,
+        toggleIsChangingAccess
     })(UsersListContainer);
