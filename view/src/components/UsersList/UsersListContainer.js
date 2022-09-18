@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Navigate} from 'react-router-dom';
 
 import {
     addUser,
@@ -8,6 +7,7 @@ import {
     deleteAccess,
     setCurrentPage,
     getUsers } from '../../redux/usersList-reducer';
+import {withAuthRedirect} from '../hoc/withAuthRedirect';
 
 import UsersList from './UsersList';
 import Preloader from '../Preloader/Preloader';
@@ -29,8 +29,6 @@ class UsersListContainer extends React.Component {
     }
 
     render() {
-        if (this.props.isAuth === false)  return <Navigate to={'/login'} replace={true} />
-
         return ( <>
             { this.props.isFetching ? <Preloader /> : null }
             <UsersList
@@ -46,6 +44,8 @@ class UsersListContainer extends React.Component {
     }
 }
 
+const AuthRedirectComponent = withAuthRedirect(UsersListContainer);
+
 
 const mapStateToProps = (state) => {
     return {
@@ -55,7 +55,6 @@ const mapStateToProps = (state) => {
         currentPage: state.usersListPage.currentPage,
         isFetching: state.usersListPage.isFetching,
         isChangingAccess: state.usersListPage.isChangingAccess,
-        isAuth: state.auth.isAuth
     }
 };
 // const mapDispatchToProps = (dispatch) => {
@@ -87,4 +86,4 @@ export default connect(mapStateToProps, {
         deleteAccess,
         setCurrentPage,
         getUsers
-    })(UsersListContainer);
+    })(AuthRedirectComponent);
