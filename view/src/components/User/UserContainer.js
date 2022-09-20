@@ -1,13 +1,10 @@
 import React from 'react';
+import {compose} from 'redux';
 import {connect} from 'react-redux';
-import {
-  useLocation,
-  useNavigate,
-  useParams
-} from 'react-router-dom';
 
 import {usersAPI} from '../../api/api';
-
+import {withRouter} from '../hoc/withRouter';
+import {withAuthRedirect} from '../hoc/withAuthRedirect';
 import {setUser} from '../../redux/user-reducer';
 
 import User from './User';
@@ -38,20 +35,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-function withRouter(Component) {
-  function ComponentWithRouterProp(props) {
-    let location = useLocation();
-    let navigate = useNavigate();
-    let params = useParams();
-    return (
-      <Component
-        {...props}
-        router={{ location, navigate, params }}
-      />
-    );
-  }
-
-  return ComponentWithRouterProp;
-}
-
-export default connect(mapStateToProps, {setUser})(withRouter(UserContainer));
+export default compose( //  ф-я для более удобной записи нескольки HOC
+    withRouter,
+    withAuthRedirect,
+    connect(mapStateToProps, {setUser})
+  )(UserContainer);

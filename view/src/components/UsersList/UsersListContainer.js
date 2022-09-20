@@ -1,4 +1,5 @@
 import React from 'react';
+import {compose} from 'redux';
 import {connect} from 'react-redux';
 
 import {
@@ -44,9 +45,7 @@ class UsersListContainer extends React.Component {
     }
 }
 
-const AuthRedirectComponent = withAuthRedirect(UsersListContainer);
-
-
+// Ф-я для выбора необходимых свойст из state  для предачи в компонент
 const mapStateToProps = (state) => {
     return {
         users: state.usersListPage.users,
@@ -57,6 +56,8 @@ const mapStateToProps = (state) => {
         isChangingAccess: state.usersListPage.isChangingAccess,
     }
 };
+
+// Ф-я для выбора действий из store для предачи в компонент
 // const mapDispatchToProps = (dispatch) => {
 //     return {
 //         addUser: (login, password, name, email) => {
@@ -80,10 +81,13 @@ const mapStateToProps = (state) => {
 //     }
 // }
 
-export default connect(mapStateToProps, {
-        addUser, // сокращённая запись mapDispatchToProps() ф-и зкоментированной выше
-        postAccess,
-        deleteAccess,
-        setCurrentPage,
-        getUsers
-    })(AuthRedirectComponent);
+export default compose( //  ф-я для более удобной записи нескольки HOC
+        withAuthRedirect,
+        connect(mapStateToProps, {
+            addUser, // сокращённая запись mapDispatchToProps() ф-и зкоментированной выше
+            postAccess,
+            deleteAccess,
+            setCurrentPage,
+            getUsers
+        })
+    )(UsersListContainer);
