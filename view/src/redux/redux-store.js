@@ -1,5 +1,6 @@
 import {createStore, combineReducers, applyMiddleware} from "redux";
-import thunkMiddleware from 'redux-thunk'
+import thunkMiddleware from 'redux-thunk';
+import { reducer as formReducer } from 'redux-form';
 
 import booksListReducer from './booksList-reducer';
 import bookReducer from './book-reducer';
@@ -15,8 +16,11 @@ const reducers = combineReducers({
     usersListPage: usersListReducer,
     userPage: userReducer,
     auth: authReducer,
+    form: formReducer,
 });
 
 const store = createStore(reducers, applyMiddleware(thunkMiddleware));
+
+window.store = store;
 
 export default store;
