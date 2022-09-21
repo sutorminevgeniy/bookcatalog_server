@@ -1,3 +1,5 @@
+import {usersAPI} from '../api/api';
+
 const SET_USER = 'SET-USER';
 
 // Начальное состояние приложения
@@ -26,5 +28,17 @@ export const setUser = (user) => {
         user
     }
 }
+
+// Ф-и (Thunk) для создания асинхронных действий
+export const getUser = (id) => {
+    return (dispatch) => {
+        usersAPI.getUser(id)
+            .then(data => {
+                dispatch(setUser({
+                    name: data.fullName
+                }));
+            });
+    }
+};
 
 export default userReducer;

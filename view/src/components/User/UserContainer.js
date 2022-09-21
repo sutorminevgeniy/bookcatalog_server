@@ -2,24 +2,17 @@ import React from 'react';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 
-import {usersAPI} from '../../api/api';
-import {withRouter} from '../hoc/withRouter';
-import {withAuthRedirect} from '../hoc/withAuthRedirect';
-import {setUser} from '../../redux/user-reducer';
+import {withRouter} from '../../hoc/withRouter';
+import {withAuthRedirect} from '../../hoc/withAuthRedirect';
+import {getUser} from '../../redux/user-reducer';
 
 import User from './User';
 
 
 class UserContainer extends React.Component {
   componentDidMount() {
-    const userId = this.props.router.params.id;
-
-    usersAPI.getUser(userId)
-      .then(data => {
-          this.props.setUser({
-            name: data.fullName
-          });
-      });
+    const id = this.props.router.params.id;
+    this.props.getUser(id);
   }
   render() {
     return (
@@ -38,5 +31,5 @@ const mapStateToProps = (state) => {
 export default compose( //  ф-я для более удобной записи нескольки HOC
     withRouter,
     withAuthRedirect,
-    connect(mapStateToProps, {setUser})
+    connect(mapStateToProps, {getUser})
   )(UserContainer);

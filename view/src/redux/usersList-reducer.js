@@ -146,6 +146,7 @@ export const toggleIsChangingAccess = (isProgress, id) => {
     }
 }
 
+// Ф-и (Thunk) для создания асинхронных действий
 export const getUsers = (currentPage, pageSize) => {
     return (dispatch) => {
         dispatch(toggleIsFetching(true));

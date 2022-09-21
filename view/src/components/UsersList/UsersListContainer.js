@@ -8,7 +8,7 @@ import {
     deleteAccess,
     setCurrentPage,
     getUsers } from '../../redux/usersList-reducer';
-import {withAuthRedirect} from '../hoc/withAuthRedirect';
+import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 
 import UsersList from './UsersList';
 import Preloader from '../Preloader/Preloader';
