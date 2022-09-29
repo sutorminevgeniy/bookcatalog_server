@@ -11,7 +11,7 @@ import {
 import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 
 import UsersList from './UsersList';
-import Preloader from '../Preloader/Preloader';
+import Preloader from '../common/Preloader/Preloader';
 
 class UsersListContainer extends React.Component {
     componentDidMount() {

@@ -1,17 +1,24 @@
 import { Field, reduxForm } from 'redux-form'
 
+import { InputField } from '../common/FormsControls/FormsControls';
+import { required, maxLength15 } from '../../utils/validators/validators';
+
 const LoginForm = (prpos) => {
     return (
         <form onSubmit={prpos.handleSubmit}>
-            <div>
-                <Field name="login" component="input" type="text" placeholder="Login" />
-            </div>
-            <div>
-                <Field name="password" component="input" type="text" placeholder="Password" />
-            </div>
-            <div>
-                <Field name="rememberMe" component="input" type="checkbox" /> remember me
-            </div>
+            <Field name="login"
+                component={InputField}
+                type="text"
+                validate={[required, maxLength15]}
+                placeholder="Login" />
+            <Field name="password"
+                component={InputField}
+                type="text"
+                placeholder="Password" />
+            <Field name="rememberMe"
+                component={InputField}
+                type="checkbox"
+                label="remember me" />
             <div>
                 <button>Login</button>
             </div>
