@@ -2,13 +2,15 @@ import {connect} from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import {Navigate} from 'react-router-dom';
 
+import style from '../common/FormsControls/FormsControls.module.css';
+
 import { InputField } from '../common/FormsControls/FormsControls';
 import { required, maxLength30 } from '../../utils/validators/validators';
-import { login } from '../../redux//auth-reducer';
+import { login } from '../../redux/auth-reducer';
 
-const LoginForm = (prpos) => {
+const LoginForm = (props) => {
     return (
-        <form onSubmit={prpos.handleSubmit}>
+        <form onSubmit={props.handleSubmit}>
             <Field name="email"
                 component={InputField}
                 type="text"
@@ -22,6 +24,9 @@ const LoginForm = (prpos) => {
                 component={InputField}
                 type="checkbox"
                 label="remember me" />
+            { props.error && <div className={style.errorSummary}>
+                {props.error}
+            </div> }
             <div>
                 <button>Login</button>
             </div>
