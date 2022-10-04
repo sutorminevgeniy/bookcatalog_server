@@ -8,6 +8,7 @@ import authorListReducer from './authorsList-reducer';
 import usersListReducer from './usersList-reducer';
 import userReducer from './user-reducer';
 import authReducer from './auth-reducer';
+import appReducer from './app-reducer';
 
 const reducers = combineReducers({
     booksListPage: booksListReducer,
@@ -16,6 +17,7 @@ const reducers = combineReducers({
     usersListPage: usersListReducer,
     userPage: userReducer,
     auth: authReducer,
+    app: appReducer,
     form: formReducer,
 });
 

@@ -1,4 +1,10 @@
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import React from 'react';
+import {Routes, Route} from 'react-router-dom';
+import {compose} from 'redux';
+import {connect} from 'react-redux';
+
+import {initializeApp} from './redux/app-reducer';
+import {withRouter} from './hoc/withRouter';
 
 import './App.css';
 
@@ -12,40 +18,55 @@ import UsersListContainer from './components/UsersList/UsersListContainer';
 import UserContainer from './components/User/UserContainer';
 import Login from './components/Login/Login';
 import Filter from './components/Filter';
+import Preloader from './components/common/Preloader/Preloader';
 
 
-function App() {
-  return (
-    <BrowserRouter>
-      <div className="wrapper">
-        <header>
-          <HeaderContainer />
-        </header>
+class App extends React.Component {
+  componentDidMount() {
+      this.props.initializeApp();
+  }
 
-        <main>
-          <aside>
-            <Filter />
-          </aside>
+  render() {
+    if (!this.props.initialized) {
+      return <Preloader />
+    }
+    return (
+        <div className="wrapper">
+          <header>
+            <HeaderContainer />
+          </header>
 
-          <div className='content'>
-            <Routes>                
-              <Route path='/books' element={<BooksListContainer />} />
-              <Route path='/book/:id' element={<BookContainer />} />
-              <Route path='/authors' element={<AuthorsListContainer />} />
-              <Route path='/users' element={<UsersListContainer />} />
-              <Route path='/user/:id' element={<UserContainer />} />
-              <Route path='/login' element={<Login />} />
-              <Route path="*" element={<p>Такой страницы еще нет!</p>} />
-            </Routes>
-          </div>        
-        </main>
+          <main>
+            <aside>
+              <Filter />
+            </aside>
 
-        <footer>
-          <Footer />
-        </footer>
-      </div>
-    </BrowserRouter>
-  );
+            <div className='content'>
+              <Routes>                
+                <Route path='/books' element={<BooksListContainer />} />
+                <Route path='/book/:id' element={<BookContainer />} />
+                <Route path='/authors' element={<AuthorsListContainer />} />
+                <Route path='/users' element={<UsersListContainer />} />
+                <Route path='/user/:id' element={<UserContainer />} />
+                <Route path='/login' element={<Login />} />
+                <Route path="*" element={<p>Такой страницы еще нет!</p>} />
+              </Routes>
+            </div>        
+          </main>
+
+          <footer>
+            <Footer />
+          </footer>
+        </div>
+    );
+  }
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  initialized: state.app.initialized
+})
+
+export default compose( //  ф-я для более удобной записи нескольки HOC
+    withRouter,
+    connect(mapStateToProps, {initializeApp})
+  )(App);

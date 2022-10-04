@@ -2,6 +2,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 
+import {BrowserRouter} from 'react-router-dom';
 import {Provider} from 'react-redux';
 
 import './index.css';
@@ -15,7 +16,9 @@ const root = createRoot(container); // createRoot(container!) if you use TypeScr
 root.render(
   // <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </Provider>
   // </React.StrictMode>
   );

@@ -35,7 +35,7 @@ export const setUserData = (id, email, login, isAuth=true) => {
 // Ф-и (Thunk) для создания асинхронных действий
 export const getUserData = () => {
     return (dispatch) => {
-        usersAPI.getMe()
+        return usersAPI.getMe()
             .then((data => {
                 if (data.resultCode === 0) {
                     const {id, email, login} = data.data;
