@@ -7,20 +7,28 @@ import {
     postAccess,
     deleteAccess,
     setCurrentPage,
-    getUsers } from '../../redux/usersList-reducer';
-import {withAuthRedirect} from '../../hoc/withAuthRedirect';
+    requestUsers } from '../../redux/usersList-reducer';
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
+import {
+    getCurrentPage,
+    getIsChangingAccess,
+    getIsFetching,
+    getPageSize,
+    getTotalUserCount,
+    getUsers
+} from '../../redux/usersList-selectors';
 
 import UsersList from './UsersList';
 import Preloader from '../common/Preloader/Preloader';
 
 class UsersListContainer extends React.Component {
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize);
+        this.props.requestUsers(this.props.currentPage, this.props.pageSize);
     }
 
     onPageChanged = (page) => {
         this.props.setCurrentPage(page);
-        this.props.getUsers(page, this.props.pageSize);
+        this.props.requestUsers(page, this.props.pageSize);
     }
     giveAccess = (id) => {
         this.props.postAccess(id);
@@ -46,14 +54,24 @@ class UsersListContainer extends React.Component {
 }
 
 // Ф-я для выбора необходимых свойст из state  для предачи в компонент
+// const mapStateToProps = (state) => {
+//     return {
+//         users: state.usersListPage.users,
+//         pageSize: state.usersListPage.pageSize,
+//         totalUserCount: state.usersListPage.totalUserCount,
+//         currentPage: state.usersListPage.currentPage,
+//         isFetching: state.usersListPage.isFetching,
+//         isChangingAccess: state.usersListPage.isChangingAccess,
+//     }
+// };
 const mapStateToProps = (state) => {
     return {
-        users: state.usersListPage.users,
-        pageSize: state.usersListPage.pageSize,
-        totalUserCount: state.usersListPage.totalUserCount,
-        currentPage: state.usersListPage.currentPage,
-        isFetching: state.usersListPage.isFetching,
-        isChangingAccess: state.usersListPage.isChangingAccess,
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUserCount: getTotalUserCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        isChangingAccess: getIsChangingAccess(state),
     }
 };
 
@@ -81,13 +99,13 @@ const mapStateToProps = (state) => {
 //     }
 // }
 
-export default compose( //  ф-я для более удобной записи нескольки HOC
+export default compose( //  ф-я для более удобной записи нескольких HOC
         withAuthRedirect,
         connect(mapStateToProps, {
             addUser, // сокращённая запись mapDispatchToProps() ф-и зкоментированной выше
             postAccess,
             deleteAccess,
             setCurrentPage,
-            getUsers
+            requestUsers
         })
     )(UsersListContainer);
