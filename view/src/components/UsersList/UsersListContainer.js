@@ -15,7 +15,7 @@ import {
     getIsFetching,
     getPageSize,
     getTotalUserCount,
-    getUsers
+    getUsers,
 } from '../../redux/usersList-selectors';
 
 import UsersList from './UsersList';
@@ -64,6 +64,7 @@ class UsersListContainer extends React.Component {
 //         isChangingAccess: state.usersListPage.isChangingAccess,
 //     }
 // };
+//  Ф-я для выбора необходимых свойст из state (через селекторы) для предачи в компонент
 const mapStateToProps = (state) => {
     return {
         users: getUsers(state),

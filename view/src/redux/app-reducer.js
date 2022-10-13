@@ -34,7 +34,10 @@ export const initializeApp = () => {
 
         Promise.all([promise])
             .then(() => {
-                dispatch(initializedSuccess ());
+                dispatch(initializedSuccess());
+            })
+            .catch(() => {
+                dispatch(initializedSuccess());
             });
 
         
