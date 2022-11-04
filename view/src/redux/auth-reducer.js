@@ -33,15 +33,12 @@ export const setUserData = (id, email, login, isAuth=true) => {
 }
 
 // Ф-и (Thunk) для создания асинхронных действий
-export const getUserData = () => {
-    return (dispatch) => {
-        return usersAPI.getMe()
-            .then((data => {
-                if (data.resultCode === 0) {
-                    const {id, email, login} = data.data;
-                    dispatch(setUserData(id, email, login));
-                }
-            }));
+export const getUserData = () => async (dispatch) => {
+    let data = await usersAPI.getMe();
+
+    if (data.resultCode === 0) {
+        const {id, email, login} = data.data;
+        dispatch(setUserData(id, email, login));
     }
 };
 export const login = (email, password, rememberMe) => {
